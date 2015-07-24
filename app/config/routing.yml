@@ -1,0 +1,4 @@
+currencies_charts:
+    resource: "@CurrenciesChartsBundle/Controller/"
+    type:     annotation
+    prefix:   /
