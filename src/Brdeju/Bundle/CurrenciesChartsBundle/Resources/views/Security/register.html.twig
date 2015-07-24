@@ -1,0 +1,107 @@
+{% extends "CurrenciesChartsBundle::layout.html.twig" %}
+
+{% block title %}{{ 'security.page_header'|trans }}{% endblock %}
+{% block page_title %}{{ 'security.page_header'|trans }}{% endblock %}
+
+{% block main %}
+<div id="login-page-wrapper" class="container">
+    <div id="signup-box" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">{{ 'security.register.title'|trans }}</div>
+            </div>  
+            <div class="panel-body" >
+                {% set notices = app.session.flashbag.get('success-notice') %}
+                {% for notice in notices %}
+                <div class="alert alert-success alert-dismissable">
+                    {{ notice|trans|raw }}
+                </div>   
+                {% endfor %}
+
+                {% set notices = app.session.flashbag.get('error-notice') %}
+                {% for notice in notices %}
+                <div class="alert alert-danger alert-dismissable">
+                    {{ notice|trans|raw }}
+                </div>   
+                {% endfor %}  
+                
+                <form action="{{ path("register") }}" method="post" id="signup-form" role="form" class="form-horizontal">                    
+                    <div class="form-group">
+                        {{ form_label(form.username, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="username" class="col-md-3 control-label">{{ 'common.label.username'|trans }}</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.username, { attr: { class: 'form-control' } }) }}
+{#                            <input type="text" class="form-control" name="username" placeholder="{{ 'common.label.username'|trans }}">#}
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        {{ form_label(form.email, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="email" class="col-md-3 control-label">{{ 'common.label.email'|trans }}</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.email, { attr: { class: 'form-control' } }) }}
+{#                            <input type="text" class="form-control" name="email" placeholder="{{ 'common.label.email'|trans }}">#}
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        {{ form_label(form.firstname, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="firstname" class="col-md-3 control-label">{{ 'common.label.firstname'|trans }}</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.firstname, { attr: { class: 'form-control' } }) }}
+{#                            <input type="text" class="form-control" name="firstname" placeholder="{{ 'common.label.firstname'|trans }}">#}
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        {{ form_label(form.lastname, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="lastname" class="col-md-3 control-label">{{ 'common.label.lastname'|trans }}</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.lastname, { attr: { class: 'form-control' } }) }}
+{#                            <input type="text" class="form-control" name="lastname" placeholder="{{ 'common.label.lastname'|trans }}">#}
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        {{ form_label(form.password.first, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="password" class="col-md-3 control-label">{{ 'common.label.password'|trans }}</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.password.first, { attr: { class: 'form-control' } }) }}
+{#                            <input type="password" class="form-control" name="password" placeholder="{{ 'common.label.password'|trans }}">#}
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        {{ form_label(form.password.second, null, { 'label_attr': {'class': 'col-md-3 control-label' }}) }}
+{#                        <label for="re_password" class="col-md-3 control-label">{{ 'common.label.re_password'|trans }}:</label>#}
+                        <div class="col-md-9">
+                            {{ form_widget(form.password.second, { attr: { class: 'form-control' } }) }}
+{#                            <input type="password" class="form-control" name="re_password" placeholder="{{ 'common.label.re_password'|trans }}">#}
+                        </div>
+                    </div>
+                    
+                    <div style="padding-top:20px"  class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" id="signup-btn" name="signup-btn" class="btn btn-primary pull-right">
+                                {{ 'security.register.form.button.register'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <hr class="blue-hr"/> 
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="padding-top:15px; font-size:85%" >{{ 'security.register.form.label.login'|trans }}
+                                <a id="signin-link" href="{{ path("login_path") }}">
+                                    {{ 'security.register.form.button.login'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div> 
+                    {{ form_rest(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>    
+{% endblock %}

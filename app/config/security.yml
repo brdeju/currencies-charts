@@ -1,11 +1,19 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+#       Symfony\Component\Security\Core\User\User: plaintext
+        Brdeju\Bundle\CurrenciesChartsBundle\Entity\User: 
+            algorithm: sha256
+            encode_as_base64: true
+            iterations: 1      
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        
     providers:
-        in_memory:
-            memory: ~
+        users:
+            entity: { class: CurrenciesChartsBundle:User }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -13,12 +21,22 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+        login:
+            pattern: ^/(login$|register)$
+            security: false
+            
+        secured_area:
+            pattern:    ^/
+            form_login:
+                check_path: check_path
+                login_path: login_path
+                always_use_default_target_path: true
+                default_target_path: hello_index
+            logout:
+                path:   _logout
+                target: login_path
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ 

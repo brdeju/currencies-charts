@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        
+        <title>Currencies Charts{% block page_title %}{% endblock %}</title>
+        
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic&subset=latin,latin-ext" rel="stylesheet">
+        {% block stylesheets %}
+            {% stylesheets combine=true filter='cssrewrite'
+                    'bundles/currenciescharts/css/bootstrap.min.css'
+                     %}
+                <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+            {% endstylesheets %}
+        {% endblock %}
+
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="skin-blue">
+    {% block body %}
+        <header id="header" class="header">
+        {% block header %}
+            {#<a href="{{ url('dashboard') }}" class="logo">
+                {% image '@SensigraphCoreBundle/Resources/public/images/mini_logo_czb.png' %}
+                <img src="{{ asset_url }}" alt="" />
+                {% endimage %}
+            </a>#}
+            
+            {#<nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                
+                {% macro main_menu_item(item, active_menu_item) %}
+                <li {% if item.name == active_menu_item|default('dashboard') %}class="active"{% endif %}>
+                    <a href="{{ url(item.name) }}">
+                        <i class="glyphicon glyphicon-{{ item.icon }}"></i> 
+                        <span class="hidden-xs">
+                            {{ ('main_menu.' ~ item.name) | trans }}
+                        </span>
+                    </a>
+                </li>                    
+                {% endmacro %}
+                
+                {% set active_menu_item = active_menu_item|default('dashboard') %}
+                
+                <ul class="nav navbar-nav">
+                    {{ _self.main_menu_item({name: 'dashboard', icon: 'th'}, active_menu_item) }}
+                    {{ _self.main_menu_item({name: 'history', icon: 'time'}, active_menu_item) }}
+                    {{ _self.main_menu_item({name: 'alert_log', icon: 'bell'}, active_menu_item) }}
+                    {{ _self.main_menu_item({name: 'report', icon: 'book'}, active_menu_item) }}
+                    {{ _self.main_menu_item({name: 'localization', icon: 'map-marker'}, active_menu_item) }}            
+                </ul>                
+                
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        {{ _self.main_menu_item({name: 'settings_index', icon: 'cog'}, active_menu_item) }}            
+                        <li>
+                            <a href="{{ url('_logout') }}" title="{{ 'main_menu.logout'|trans }}">
+                                <i class="glyphicon glyphicon-off"></i> 
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>#}
+        {% endblock %}
+        </header>
+        
+        <section>
+        {% block main %}
+
+        {% endblock %}
+        </section>
+
+        <footer id="menu-footer">
+        {% block footer %}
+        {% endblock %}
+        </footer>
+        
+        {% block javascript %}
+            {% block javascripts %}
+                {% javascripts filter='?yui_js' combine=true
+                        'bundles/currenciescharts/js/jquery-1.11.3.min.js'
+                        'bundles/currenciescharts/js/bootstrap.min.js'
+                        %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            {% endblock %}
+        {% endblock %}
+    {% endblock %}
+    </body>
+</html>

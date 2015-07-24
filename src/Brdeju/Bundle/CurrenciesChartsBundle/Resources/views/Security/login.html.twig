@@ -1,0 +1,73 @@
+{% extends "CurrenciesChartsBundle::layout.html.twig" %}
+
+{% block title %}{{ 'security.page_header'|trans }}{% endblock %}
+{% block page_title %}{{ 'security.page_header'|trans }}{% endblock %}
+
+{% block main %}
+<div id="login-page-wrapper" class="container">
+    <div id="login-box" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">{{ 'security.login.title'|trans }}</div>
+            </div>
+            <div style="padding-top:30px" class="panel-body" >  
+                {% set notices = app.session.flashbag.get('success-notice') %}
+                {% for notice in notices %}
+                <div class="alert alert-success alert-dismissable">
+                    {{ notice|trans|raw }}
+                </div>   
+                {% endfor %}
+
+                {% set notices = app.session.flashbag.get('error-notice') %}
+                {% for notice in notices %}
+                <div class="alert alert-danger alert-dismissable">
+                    {{ notice|trans|raw }}
+                </div>   
+                {% endfor %}  
+                
+                <form action="{{ path("check_path") }}" method="post" id="login-form" role="form" class="form-horizontal">
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <label for="username" class="sr-only">{{ 'common.label.username'|trans }}:</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" placeholder="{{ 'common.label.username'|trans }}">                                        
+                    </div>
+                    
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <label for="password" class="sr-only">{{ 'common.label.password'|trans }}:</label>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'common.label.password'|trans }}">                                        
+                    </div>
+                       
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label for="remember_me" style="font-weight:normal" class="remember_me">
+                                <input type="checkbox" id="remember_me" name="remember_me" checked class="checkbox col-xs-1">
+                                {{ 'security.login.form.label.remember_me'|trans}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+                        <div class="col-sm-12 controls">
+                            <button type="submit" id="login-btn" name="login-btn" class="btn btn-success pull-right" style="min-width: 160px">
+                                {{ 'security.login.form.button.submit'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <hr class="blue-hr"/> 
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="padding-top:15px; font-size:85%" >{{ 'security.login.form.label.register'|trans }}
+                                <a id="signup-link" href="{{ path("register") }}">
+                                    {{ 'security.login.form.button.register'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>    
+            </div>
+        </div>
+    </div>  
+</div>    
+{% endblock %}
