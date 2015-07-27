@@ -96,6 +96,14 @@
                     %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
+            {% if app.request.locale is not defined or app.request.locale == 'pl' %}
+                {% javascripts filter='?yui_js' combine=true
+                        'bundles/currenciescharts/js/locales/bootstrap-datetimepicker.pl.js'
+                        'bundles/currenciescharts/js/i18n/pl.js'
+                        %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            {% endif %}
         {% endblock %}
 
     {% endblock %}

@@ -8,9 +8,18 @@ $(function () {
     $(document).ready(function() {
         var date = new Date();
         var weekBefore = date.setDate(date.getDate() - 7);
-        $('#date-start').datetimepicker({defaultDate: weekBefore, format: 'MM/DD/YYYY'});
-        $('#date-end').datetimepicker({defaultDate: "now", format: 'MM/DD/YYYY'});
+        $('#date-start').datetimepicker({language: 'pl', initialDate: "-7d", format: 'mm/dd/yyyy', minView: 2});
+        $('#date-end').datetimepicker({language: 'pl', format: 'mm/dd/yyyy', minView: 2});
         
+        Highcharts.setOptions({
+            lang: {
+                months: i18n.charts.months,
+                shortMonths: i18n.charts.shortMonths,
+                weekdays: i18n.charts.weekdays,
+                loading: i18n.charts.loading,
+                noData: i18n.charts.noData
+            },
+        });
         var options = {
             title: {
                 text: ''
@@ -85,10 +94,10 @@ $(function () {
             });
         };
 
-        $("#date-start").on("dp.change", function (e) {
+        $("#date-start").on('changeDate', function (e) {
             refreshChart();
         });
-        $("#date-end").on("dp.change", function (e) {
+        $("#date-end").on('changeDate', function (e) {
             refreshChart();
         });
         refreshChart();

@@ -49,3 +49,8 @@ currencies:
         PLNEUR: Kurs wymiany PLN na EURO
         PLNGBP: Kurs wymiany PLN na GBP
         
+main_menu:
+    login_path: Zaloguj się
+    register: Załóż konto
+    _logout: Wyloguj
+    currencies: Kursy walut

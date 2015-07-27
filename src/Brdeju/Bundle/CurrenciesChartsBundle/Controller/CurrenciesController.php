@@ -80,18 +80,18 @@ class CurrenciesController extends Controller {
     
     private function parseQueryStringToRatesRequest($currency, $get) {
         $params = array();
-        if( isset($get['base']) ) {
+        if( isset($get['base']) && !empty($get['base']) ) {
             $params['Symbols'] = $get['base'].strtoupper($currency);
         } else {
             $params['Symbols'] = 'PLN'.strtoupper($currency);
         }
-        if( isset($get['start_date']) ) {
+        if( isset($get['start_date']) && !empty($get['start_date']) ) {
             $params['StartDate'] = $get['start_date'];
         } else {
             $date = strtotime("-7 day", time());
             $params['StartDate'] = date('m/d/Y', $date);
         }
-        if( isset($get['end_date']) ) {
+        if( isset($get['end_date']) && !empty($get['end_date']) ) {
             $params['EndDate'] = $get['end_date'];
         } else {
             $params['EndDate'] = date('m/d/Y', time());

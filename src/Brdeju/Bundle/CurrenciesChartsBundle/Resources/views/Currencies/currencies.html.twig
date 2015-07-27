@@ -41,6 +41,7 @@
 {% block javascript %}
     <script>
         var CURRENCY = '{{active_item}}';
+        var LOCALE = '{{ app.request.locale }}';
     </script>
     
     {{ parent() }}

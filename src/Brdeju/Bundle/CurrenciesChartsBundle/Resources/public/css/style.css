@@ -24,3 +24,7 @@
 .filter-wrapper {
     padding-top: 20px;
 }
+
+input.checkbox {
+    margin: -4px -18px !important;
+}
