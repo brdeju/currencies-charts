@@ -31,7 +31,7 @@ class UserType extends AbstractType {
                 'invalid_message' => 'security.register.form.password.not_match',
                 'required' => true,
                 'first_options' => array('label' => 'common.label.password'),
-                'second_options' => array('label' => 'common.repeat_password'),
+                'second_options' => array('label' => 'common.label.repeat_password'),
         ));
     }
 

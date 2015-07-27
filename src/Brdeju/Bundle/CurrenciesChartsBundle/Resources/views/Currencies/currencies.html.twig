@@ -1,0 +1,53 @@
+{% extends "CurrenciesChartsBundle::layout.html.twig" %}
+
+{% block title %}{{ 'currencies.page_header'|trans }}{% endblock %}
+{% block page_title %}{{ 'currencies.page_header'|trans }}{% endblock %}
+
+{% block main %}
+<div id="currencies-page-wrapper" class="container">
+    {% macro currencies_nav_item(currency, active_item) %}
+    <li {% if currency == active_item %}class="active"{% endif %}>
+        <a data-toggle="{{ currency~'-chart-tab' }}" href="{{ url('currencies', {currency:currency}) }}">
+            <span class="hidden-xs">
+                {{ ('currencies.currency.' ~ currency) | trans | capitalize }}
+            </span>
+        </a>
+    </li>                    
+    {% endmacro %}
+     
+    <h2 class="">
+        {{ 'currencies.select_currencies'|trans }}
+    </h2>
+    
+    <div class="nav nav-tabs">
+    {% for currency in currencies %}
+        {{ _self.currencies_nav_item(currency, active_item) }}
+    {% endfor %}
+    </div>
+    
+    
+    <div class="tab-content">
+    {% for currency in currencies %}
+        <div id="{{ currency~'-chart-tab' }}" class="tab-pane fade in {% if active_item == currency %}active{% endif %}">
+            {% if active_item == currency %}
+                {{ render(url('currency_chart', {currency:currency})) }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+</div>    
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var CURRENCY = '{{active_item}}';
+    </script>
+    
+    {{ parent() }}
+    
+    {% javascripts filter='?yui_js' combine=true
+            'bundles/currenciescharts/js/currency_chart.js'
+            %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %} 

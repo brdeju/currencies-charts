@@ -10,6 +10,8 @@
         {% block stylesheets %}
             {% stylesheets combine=true filter='cssrewrite'
                     'bundles/currenciescharts/css/bootstrap.min.css'
+                    'bundles/currenciescharts/css/bootstrap-datetimepicker.min.css'
+                    'bundles/currenciescharts/css/style.css'
                      %}
                 <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
             {% endstylesheets %}
@@ -22,55 +24,52 @@
     </head>
     <body class="skin-blue">
     {% block body %}
-        <header id="header" class="header">
+        <header id="header" class="navbar navbar-default">
         {% block header %}
-            {#<a href="{{ url('dashboard') }}" class="logo">
-                {% image '@SensigraphCoreBundle/Resources/public/images/mini_logo_czb.png' %}
-                <img src="{{ asset_url }}" alt="" />
-                {% endimage %}
-            </a>#}
-            
-            {#<nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-nav" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </a>
-                
-                {% macro main_menu_item(item, active_menu_item) %}
-                <li {% if item.name == active_menu_item|default('dashboard') %}class="active"{% endif %}>
-                    <a href="{{ url(item.name) }}">
+                </button>
+                <a class="navbar-brand" href="{{ url('currencies') }}">Currencies Charts</a>
+            </div>
+            
+            {% macro main_menu_item(item, active_menu_item) %}
+            <li {% if item.name == active_menu_item|default('currencies') %}class="active"{% endif %}>
+                <a href="{{ url(item.name) }}">
+                    {% if item.icon is defined %}
                         <i class="glyphicon glyphicon-{{ item.icon }}"></i> 
-                        <span class="hidden-xs">
-                            {{ ('main_menu.' ~ item.name) | trans }}
-                        </span>
-                    </a>
-                </li>                    
-                {% endmacro %}
-                
-                {% set active_menu_item = active_menu_item|default('dashboard') %}
-                
+                    {% endif %}
+                    <span class="hidden-xs">
+                        {{ ('main_menu.' ~ item.name) | trans }}
+                    </span>
+                </a>
+            </li>                    
+            {% endmacro %}
+            
+            {% set active_menu_item = active_menu_item|default('currencies') %}                
+            <div class="collapse navbar-collapse" id="menu-nav">
                 <ul class="nav navbar-nav">
-                    {{ _self.main_menu_item({name: 'dashboard', icon: 'th'}, active_menu_item) }}
-                    {{ _self.main_menu_item({name: 'history', icon: 'time'}, active_menu_item) }}
-                    {{ _self.main_menu_item({name: 'alert_log', icon: 'bell'}, active_menu_item) }}
-                    {{ _self.main_menu_item({name: 'report', icon: 'book'}, active_menu_item) }}
-                    {{ _self.main_menu_item({name: 'localization', icon: 'map-marker'}, active_menu_item) }}            
-                </ul>                
+                    {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {{ _self.main_menu_item({name: 'currencies', icon: 'euro'}, active_menu_item) }}
+                    {% endif %}
+                </ul>
                 
                 <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-                        {{ _self.main_menu_item({name: 'settings_index', icon: 'cog'}, active_menu_item) }}            
-                        <li>
-                            <a href="{{ url('_logout') }}" title="{{ 'main_menu.logout'|trans }}">
-                                <i class="glyphicon glyphicon-off"></i> 
-                            </a>
-                        </li>
+                    <ul class="nav navbar-nav"> 
+                        {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {{ _self.main_menu_item({name: '_logout', icon: 'off'}, active_menu_item) }}
+                        {% else %}
+                            {{ _self.main_menu_item({name: 'register'}, active_menu_item) }}
+                            {{ _self.main_menu_item({name: 'login_path', icon: 'log-in'}, active_menu_item) }}
+                        {% endif %}
                     </ul>
                 </div>
-            </nav>#}
+            </div>  
+        </div>
         {% endblock %}
         </header>
         
@@ -86,15 +85,19 @@
         </footer>
         
         {% block javascript %}
-            {% block javascripts %}
-                {% javascripts filter='?yui_js' combine=true
-                        'bundles/currenciescharts/js/jquery-1.11.3.min.js'
-                        'bundles/currenciescharts/js/bootstrap.min.js'
-                        %}
-                    <script src="{{ asset_url }}"></script>
-                {% endjavascripts %}
-            {% endblock %}
+            {% javascripts filter='?yui_js' combine=true
+                    'bundles/fosjsrouting/js/router.js'
+                    'js/fos_js_routes.js'
+                    'bundles/currenciescharts/js/jquery-1.11.3.min.js'
+                    'bundles/currenciescharts/js/moment.min.js'
+                    'bundles/currenciescharts/js/bootstrap.min.js'
+                    'bundles/currenciescharts/js/bootstrap-datetimepicker.min.js'
+                    'bundles/currenciescharts/js/highcharts-custom.js'
+                    %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
+
     {% endblock %}
     </body>
 </html>

@@ -30,8 +30,8 @@ security:
             form_login:
                 check_path: check_path
                 login_path: login_path
-                always_use_default_target_path: true
-                default_target_path: hello_index
+                always_use_default_target_path: false
+                default_target_path: currencies
             logout:
                 path:   _logout
                 target: login_path

@@ -1,0 +1,26 @@
+.navbar .hidden-xs {
+    display: inline-block !important;
+}
+
+@media (max-width: 940px) {
+.navbar .hidden-xs {
+  display: none!important;
+ }
+}
+
+.navbar .active a {
+    background: rgba(0, 0, 0, 0.1)
+}
+
+@media (max-width: 590px) {
+    .logo {
+        display: none !important;
+    } 
+    .navbar {
+        margin-left: 0px !important;
+    }
+}
+
+.filter-wrapper {
+    padding-top: 20px;
+}

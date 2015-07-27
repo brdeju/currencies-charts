@@ -46,3 +46,6 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+fos_js_routing:
+    routes_to_expose: [ ^.*$ ]

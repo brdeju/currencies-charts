@@ -9,11 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/hello", name="hello_index")
+     * @Route("/", name="index")
      * @Template()
      */
     public function indexAction()
     {
-        return array();
+        return $this->redirect($this->generateUrl('currencies'));
     }
 }

@@ -17,3 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    xignite.api_key: 4A406EED47AE4B9CA15765246869DCF3
+    xignite.soap_client_url: "http://globalcurrencies.xignite.com/xGlobalCurrencies.asmx?WSDL"
+    xignite.authenticate_url: "http://www.xignite.com/services/"
+    

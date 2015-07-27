@@ -1,0 +1,51 @@
+# Tłumaczenia widoków
+common:
+    label:
+        username: Nazwa użytkownika
+        password: Hasło
+        repeat_password: Powtórz hasło
+        email: Adres e-mail
+        firstname: Imię
+        lastname: Nazwisko
+        
+        
+    
+security:
+    login:
+        page_header: Logowanie
+        title: Logowanie
+        form:
+            label:
+                remember_me: Zapamiętaj mnie
+                register: Nie masz konta? 
+            button:
+                submit: Zaloguj
+                register: Zarejestruj się!
+            
+    register:
+        page_header: Rejestracja
+        title: Rejestracja
+        form:
+            label:
+                remember_me: Zapamiętaj mnie
+                register: Posiadasz już konto? 
+            button:
+                register: Zarejestruj
+                login: Zaloguj się!
+        password:
+            not_match: Hasła nie pasują
+    
+currencies:
+    page_header: Kurs walut z ostatnich dni
+    select_currencies: Wybierz walutę
+    currency:
+        usd: USD
+        pln: PLN
+        eur: EURO
+        gbp: GBP
+    rates:
+        PLNUSD: Kurs wymiany PLN na USD
+        PLNPLN: Kurs wymiany PLN na PLN
+        PLNEUR: Kurs wymiany PLN na EURO
+        PLNGBP: Kurs wymiany PLN na GBP
+        
